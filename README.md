@@ -7,7 +7,7 @@ the “HEADER” section above it also contains details on how to use this API k
 “set the header field Authorization=Bearer XXXX” :- you have to create a header named “Authorization” and set its value to “Bearer XXXX” where XXXX stands for the API key that you have generated above
 
 
-Now the assignment is to create an API that does the following ( one single API and not multiple separate API’s)
+## Now the assignment is to create an API that does the following ( one single API and not multiple separate API’s)
 
 Get the list of all the top 100 cryptocurrency coins in the world using the /assets api ( the first api mentioned in the documentation)
 Save all the 100 coins in database ( each document to have data of 1 coin)
