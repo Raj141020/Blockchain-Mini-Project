@@ -14,16 +14,24 @@ const getcoin = async function (req, res) {
         }
         let result = await axios(options);
         let coinData = result.data
-        let sortedData = coinData.data
+        let unsortedData = coinData.data
         console.log(coinData.data[0])
-        let len = (coinData.data).length
-        console.log(len)
 
-            const deletedbData = await model.deleteMany()
-            const createData = await model.create(coinData.data)
+        for(let i=0;i<unsortedData.length;i++){
+            let coin = {
+                symbol:unsortedData[i].symbol,
+                name:unsortedData[i].name,
+                marketCapUsd:unsortedData[i].marketCapUsd,
+                priceUsd:unsortedData[i].priceUsd
+            }
+           await model.findOneAndUpdate({symbol:unsortedData[i].symbol},coin,{upsert:true,new:true})
 
-        let a = (sortedData).sort((a,b)=>a.changePercent24Hr - b.changePercent24Hr)
-        // console.log(a.length)
+        }
+       
+
+        let sortedData = (unsortedData).sort((a,b)=>a.changePercent24Hr - b.changePercent24Hr)
+        console.log(sortedData[0])
+        console.log(sortedData.length)
         res.status(200).send({ status: true,msg: coinData })
     }
     catch (err) {
